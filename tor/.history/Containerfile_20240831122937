@@ -1,0 +1,16 @@
+FROM docker.io/debian:bookworm-20240812
+
+LABEL org.opencontainers.image.ref.name=tor-bookworm-20240812
+LABEL org.opencontainers.image.version=1
+
+
+# For the stable version.
+RUN apt update && apt install -y apt-transport-tor 
+#&& echo "deb [signed-by=/usr/share/keyrings/deb.torproject.org-keyring.gpg] tor+http://apow7mjfryruh65chtdydfmqfpj5btws7nbocgtaovhvezgccyjazpqd.onion/torproject.org bookworm main\ndeb [signed-by=/usr/share/keyrings/deb.torproject.org-keyring.gpg] tor+http://apow7mjfryruh65chtdydfmqfpj5btws7nbocgtaovhvezgccyjazpqd.onion/torproject.org tor-nightly-main-bookworm main" >> /etc/apt/sources.list.d/tor.list
+
+#RUN echo -e "Types: deb deb-src\nComponents: main\nSuites: bookworm\nURIs: tor+http://apow7mjfryruh65chtdydfmqfpj5btws7nbocgtaovhvezgccyjazpqd.onion/torproject.org\nArchitectures: amd64 arm64 i386\nSigned-By: /usr/share/keyrings/deb.torproject.org-keyring.gpg" > /etc/apt/sources.list.d/tor.sources && apt update && apt install -y apt-transport-tor
+
+# && apt update && apt install -y apt-transport-tor
+VOLUME ["/etc/tor","/var/log/tor","/var/lib/tor"]
+
+CMD [ "/bin/bash" ]
