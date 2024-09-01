@@ -1,7 +1,8 @@
 #!/bin/bash
 
-NAME=$(awk -v FS== '/org.opencontainers.image.ref.name/{print $2}' Containerfile)
-VERSION=$(awk -v FS== '/org.opencontainers.image.version/{print $2}' Containerfile)
+CONTAINER_FILE=Containerfile-bookworm
+NAME=$(awk -v FS== '/org.opencontainers.image.ref.name/{print $2}' $CONTAINER_FILE)
+VERSION=$(awk -v FS== '/org.opencontainers.image.version/{print $2}' $CONTAINER_FILE)
 
 mkdir -p ./etc/tor ./var/log/tor ./var/lib/tor
 
