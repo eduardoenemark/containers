@@ -4,7 +4,7 @@ LABEL org.opencontainers.image.ref.name=tor
 LABEL org.opencontainers.image.version=1.0-bookworm-20240812
 LABEL org.opencontainers.image.authors=eduardoenemark
 LABEL org.opencontainers.image.source=github.com/eduardoenemark/containers/tor
-LABEL org.opencontainers.image.title="TOR install on Debian Bookworm version"
+LABEL org.opencontainers.image.title="TOR installation on Debian Bookworm version"
 
 RUN apt update && \
     apt install -y ca-certificates apt-transport-https wget gpg && \
