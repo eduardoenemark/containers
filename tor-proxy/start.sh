@@ -6,7 +6,6 @@ VERSION=$(awk -v FS== '/org.opencontainers.image.version/{print $2}' $CONTAINER_
 
 podman run -d --rm \
   --name tor-proxy-container \
-  -p 61987:61987 \
   -p 61988:61988 \
   localhost/$NAME:$VERSION
 
