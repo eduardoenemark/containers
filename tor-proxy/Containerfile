@@ -1,0 +1,22 @@
+FROM docker.io/kalilinux/kali-rolling:amd64
+
+LABEL org.opencontainers.image.ref.name=tor-proxy
+LABEL org.opencontainers.image.version=1.0-kali-rolling
+LABEL org.opencontainers.image.authors=eduardoenemark
+LABEL org.opencontainers.image.source=github.com/eduardoenemark/containers/tor-proxy
+LABEL org.opencontainers.image.title="TOR Proxy: Socat + Privoxy + TOR"
+
+RUN apt update && \
+    apt install -y ca-certificates && \
+    apt install -y socat && \
+    apt install -y privoxy && \
+    apt install -y tor/kali-rolling
+
+COPY privoxy-config /etc/privoxy/config
+
+# HTTP port.
+EXPOSE 61988/tcp
+
+VOLUME ["/var/log","/var/log/tor","/var/log/privoxy"]
+
+CMD ["/bin/bash","-c","tor >> /var/log/tor/notices.log 2>&1 & privoxy /etc/privoxy/config & socat TCP4-LISTEN:61988,fork,reuseaddr TCP4:127.0.0.1:61987 >> /var/log/socat.log 2>&1"]
