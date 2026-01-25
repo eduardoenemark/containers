@@ -4,6 +4,8 @@ A lightweight container that runs [Tor](https://www.torproject.org), wraps it in
 
 It's possible to browse the web, watch videos, and download files without lag. Keep in mind that if your Internet connection is slow, your experience will be poor.
 
+When the container starts, the Tor circuit participation process is established. From start to connection establishment, it can take a few minutes. Please be patient during this time.
+
 ## What This Container Does
 
 This container sets up a secure proxy that:
