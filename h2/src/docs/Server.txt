@@ -1,0 +1,345 @@
+http://www.h2database.com/javadoc/org/h2/tools/Server.html
+
+
+Package org.h2.tools
+Class Server
+java.lang.Object
+org.h2.util.Tool
+org.h2.tools.Server
+
+All Implemented Interfaces:
+    Runnable, org.h2.server.ShutdownHandler
+
+public class Server
+extends org.h2.util.Tool
+implements Runnable, org.h2.server.ShutdownHandler
+Starts the H2 Console (web-) server, TCP, and PG server.
+
+    Field Summary Link icon
+    Fields inherited from class org.h2.util.Tool Link icon
+    out
+    Constructor Summary Link icon
+    Constructors
+    Constructor
+    Description
+    Server()
+    Generic constructor
+    Server(org.h2.server.Service service, String... args)
+    Create a new server for the given service.
+    Method Summary Link icon
+
+    Modifier and Type
+    Method
+    Description
+    static Server
+    createPgServer(String... args)
+    Create a new PG server, but does not start it yet.
+    static Server
+    createTcpServer(String... args)
+    Create a new TCP server, but does not start it yet.
+    static Server
+    createWebServer(String... args)
+    Create a new web server, but does not start it yet.
+    int
+    getPort()
+    Gets the port this server is listening on.
+    org.h2.server.Service
+    getService()
+    Get the service attached to this server.
+    String
+    getStatus()
+    Get the status of this server.
+    String
+    getURL()
+    Gets the URL of this server.
+    boolean
+    isRunning(boolean traceError)
+    Checks if the server is running.
+    static void
+    main(String... args)
+    When running without options, -tcp, -web, -browser and -pg are started.
+    static void
+    openBrowser(String url)
+    Open a new browser tab or window with the given URL.
+    void
+    run()
+    INTERNAL
+    void
+    runTool(String... args)
+    Run the tool with the given output stream and arguments.
+    void
+    setShutdownHandler(org.h2.server.ShutdownHandler shutdownHandler)
+    INTERNAL
+    void
+    shutdown()
+    INTERNAL
+    static void
+    shutdownTcpServer(String url, String password, boolean force, boolean all)
+    Shutdown one or all TCP server.
+    Server
+    start()
+    Tries to start the server.
+    static void
+    startWebServer(Connection conn)
+    Start a web server and a browser that uses the given connection.
+    static void
+    startWebServer(Connection conn, boolean ignoreProperties)
+    Start a web server and a browser that uses the given connection.
+    void
+    stop()
+    Stops the server.
+    Methods inherited from class org.h2.util.Tool Link icon
+    getMainClassName, isOption, printNoDatabaseFilesFound, setOut, showUsage, showUsageAndThrowUnsupportedOption, throwUnsupportedOption
+    Methods inherited from class java.lang.Object Link icon
+    clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait
+
+    Constructor Details Link icon
+        Server Link icon
+        public Server()
+        Generic constructor
+        Server Link icon
+        public Server(org.h2.server.Service service,
+         String... args)
+               throws SQLException
+        Create a new server for the given service.
+
+        Parameters:
+            service - the service
+            args - the command line arguments
+        Throws:
+            SQLException - on failure
+
+    Method Details Link icon
+        main Link icon
+        public static void main(String... args)
+                         throws SQLException
+        When running without options, -tcp, -web, -browser and -pg are started. Options are case sensitive.
+        Supported options [-help] or [-?] 	Print the list of options
+        [-web] 	Start the web server with the H2 Console
+        [-webAllowOthers] 	Allow other computers to connect - see below
+        [-webExternalNames <names>] 	The comma-separated list of external names and IP addresses of this server, used together with -webAllowOthers
+        [-webDaemon] 	Use a daemon thread
+        [-webVirtualThreads <true|false>] 	Use virtual threads (on Java 21+ only)
+        [-webPort <port>] 	The port (default: 8082)
+        [-webSSL] 	Use encrypted (HTTPS) connections
+        [-webAdminPassword] 	Hash of password of DB Console administrator, can be generated with WebServer.encodeAdminPassword(String). Can be passed only to the runTool(String...) method, this method rejects it. It is also possible to store this setting in configuration file of H2 Console.
+        [-browser] 	Start a browser connecting to the web server
+        [-tcp] 	Start the TCP server
+        [-tcpAllowOthers] 	Allow other computers to connect - see below
+        [-tcpDaemon] 	Use a daemon thread
+        [-tcpVirtualThreads <true|false>] 	Use virtual threads (on Java 21+ only)
+        [-tcpPort <port>] 	The port (default: 9092)
+        [-tcpSSL] 	Use encrypted (SSL) connections
+        [-tcpPassword <pwd>] 	The password for shutting down a TCP server
+        [-tcpShutdown "<url>"] 	Stop the TCP server; example: tcp://localhost
+        [-tcpShutdownForce] 	Do not wait until all connections are closed
+        [-pg] 	Start the PG server
+        [-pgAllowOthers] 	Allow other computers to connect - see below
+        [-pgDaemon] 	Use a daemon thread
+        [-pgVirtualThreads <true|false>] 	Use virtual threads (on Java 21+ only)
+        [-pgPort <port>] 	The port (default: 5435)
+        [-properties "<dir>"] 	Server properties (default: ~, disable: null)
+        [-baseDir <dir>] 	The base directory for H2 databases (all servers)
+        [-ifExists] 	Only existing databases may be opened (all servers)
+        [-ifNotExists] 	Databases are created when accessed
+        [-trace] 	Print additional trace information (all servers)
+        [-key <from> <to>] 	Allows to map a database name to another (all servers)
+        The options -xAllowOthers are potentially risky. For details, see Advanced Topics / Protection against Remote Access.
+
+        Parameters:
+            args - the command line arguments
+        Throws:
+            SQLException - on failure
+
+        runTool Link icon
+        public void runTool(String... args)
+                     throws SQLException
+        Description copied from class: org.h2.util.Tool
+        Run the tool with the given output stream and arguments.
+
+        Specified by:
+            runTool in class org.h2.util.Tool
+        Parameters:
+            args - the argument list
+        Throws:
+            SQLException - on failure
+
+        shutdownTcpServer Link icon
+        public static void shutdownTcpServer(String url,
+         String password,
+         boolean force,
+         boolean all)
+                                      throws SQLException
+        Shutdown one or all TCP server. If force is set to false, the server will not allow new connections, but not kill existing connections, instead it will stop if the last connection is closed. If force is set to true, existing connections are killed. After calling the method with force=false, it is not possible to call it again with force=true because new connections are not allowed. Example:
+
+         Server.shutdownTcpServer("tcp://localhost:9094",
+                 password, true, false);
+         
+
+        Parameters:
+            url - example: tcp://localhost:9094
+            password - the password to use ("" for no password)
+            force - the shutdown (don't wait)
+            all - whether all TCP servers that are running in the JVM should be stopped
+        Throws:
+            SQLException - on failure
+
+        getStatus Link icon
+        public String getStatus()
+        Get the status of this server.
+
+        Returns:
+            the status
+
+        createWebServer Link icon
+        public static Server createWebServer(String... args)
+                                      throws SQLException
+        Create a new web server, but does not start it yet. Example:
+
+         Server server = Server.createWebServer("-trace").start();
+         
+
+        Supported options are: -webPort, -webSSL, -webAllowOthers, -webDaemon, -trace, -ifExists, -ifNotExists, -baseDir, -properties. See the main method for details.
+
+        Parameters:
+            args - the argument list
+        Returns:
+            the server
+        Throws:
+            SQLException - on failure
+
+        createTcpServer Link icon
+        public static Server createTcpServer(String... args)
+                                      throws SQLException
+        Create a new TCP server, but does not start it yet. Example:
+
+         Server server = Server.createTcpServer(
+             "-tcpPort", "9123", "-tcpAllowOthers").start();
+         
+
+        Supported options are: -tcpPort, -tcpSSL, -tcpPassword, -tcpAllowOthers, -tcpDaemon, -trace, -ifExists, -ifNotExists, -baseDir, -key. See the main method for details.
+
+        If no port is specified, the default port is used if possible, and if this port is already used, a random port is used. Use getPort() or getURL() after starting to retrieve the port.
+
+        Parameters:
+            args - the argument list
+        Returns:
+            the server
+        Throws:
+            SQLException - on failure
+
+        createPgServer Link icon
+        public static Server createPgServer(String... args)
+                                     throws SQLException
+        Create a new PG server, but does not start it yet. Example:
+
+         Server server =
+             Server.createPgServer("-pgAllowOthers").start();
+         
+
+        Supported options are: -pgPort, -pgAllowOthers, -pgDaemon, -trace, -ifExists, -ifNotExists, -baseDir, -key. See the main method for details.
+
+        If no port is specified, the default port is used if possible, and if this port is already used, a random port is used. Use getPort() or getURL() after starting to retrieve the port.
+
+        Parameters:
+            args - the argument list
+        Returns:
+            the server
+        Throws:
+            SQLException - on failure
+
+        start Link icon
+        public Server start()
+                     throws SQLException
+        Tries to start the server.
+
+        Returns:
+            the server if successful
+        Throws:
+            SQLException - if the server could not be started
+
+        isRunning Link icon
+        public boolean isRunning(boolean traceError)
+        Checks if the server is running.
+
+        Parameters:
+            traceError - if errors should be written
+        Returns:
+            if the server is running
+
+        stop Link icon
+        public void stop()
+        Stops the server.
+        getURL Link icon
+        public String getURL()
+        Gets the URL of this server.
+
+        Returns:
+            the url
+
+        getPort Link icon
+        public int getPort()
+        Gets the port this server is listening on.
+
+        Returns:
+            the port
+
+        run Link icon
+        public void run()
+        INTERNAL
+
+        Specified by:
+            run in interface Runnable
+
+        setShutdownHandler Link icon
+        public void setShutdownHandler(org.h2.server.ShutdownHandler shutdownHandler)
+        INTERNAL
+
+        Parameters:
+            shutdownHandler - to set
+
+        shutdown Link icon
+        public void shutdown()
+        INTERNAL
+
+        Specified by:
+            shutdown in interface org.h2.server.ShutdownHandler
+
+        getService Link icon
+        public org.h2.server.Service getService()
+        Get the service attached to this server.
+
+        Returns:
+            the service
+
+        openBrowser Link icon
+        public static void openBrowser(String url)
+                                throws Exception
+        Open a new browser tab or window with the given URL.
+
+        Parameters:
+            url - the URL to open
+        Throws:
+            Exception - on failure
+
+        startWebServer Link icon
+        public static void startWebServer(Connection conn)
+                                   throws SQLException
+        Start a web server and a browser that uses the given connection. The current transaction is preserved. This is specially useful to manually inspect the database when debugging. This method return as soon as the user has disconnected.
+
+        Parameters:
+            conn - the database connection (the database must be open)
+        Throws:
+            SQLException - on failure
+
+        startWebServer Link icon
+        public static void startWebServer(Connection conn,
+         boolean ignoreProperties)
+                                   throws SQLException
+        Start a web server and a browser that uses the given connection. The current transaction is preserved. This is specially useful to manually inspect the database when debugging. This method return as soon as the user has disconnected.
+
+        Parameters:
+            conn - the database connection (the database must be open)
+            ignoreProperties - if true properties from .h2.server.properties will be ignored
+        Throws:
+            SQLException - on failure

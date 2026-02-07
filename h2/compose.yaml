@@ -1,0 +1,18 @@
+# Example docker-compose.yaml for h2-database-engine container
+version: '3.8'
+services:
+  h2-database-engine:
+    image: localhost/h2-database-engine:1.0
+    container_name: h2-database-engine
+    restart: always
+    ports:
+      - "0.0.0.0:9092:9092/tcp"
+      - "0.0.0.0:8082:8082/tcp"
+    volumes:
+      - ./h2-data:/h2/data
+    command: [ "-trace", "-web", "-tcp", "-ifNotExists", "-webAllowOthers", "-tcpAllowOthers", "-baseDir", "/h2/data" ]
+    deploy:
+      resources:
+        limits:
+          cpus: 2
+          memory: 1G
