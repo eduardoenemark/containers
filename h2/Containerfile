@@ -9,6 +9,13 @@ ENV CREATED_DATETIME=${CREATED_DATETIME}
 ARG H2_VERSION
 ENV H2_VERSION=${H2_VERSION}
 
+# Expose default H2 TCP port and web console port
+ENV H2_TCP_PORT=9092
+EXPOSE ${H2_TCP_PORT}
+
+ENV H2_WEB_CONSOLE_PORT=8082
+EXPOSE ${H2_WEB_CONSOLE_PORT}
+
 # ---------- Image metadata (labels) ----------
 LABEL org.opencontainers.image.ref.name="h2-database-engine" \
     org.opencontainers.image.version="1.0"                  \
@@ -32,8 +39,6 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 # ---------- Runtime configuration ----------
 # Declare a persistent volume for database files
 VOLUME [ "/h2/data" ]
-EXPOSE ${H2_TCP_PORT}
-EXPOSE ${H2_CONSOLE_PORT}
 
 # ---------- Container entry point ----------
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
