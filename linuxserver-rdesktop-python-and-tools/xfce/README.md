@@ -8,10 +8,15 @@ This container extends the official linuxserver/rdesktop image with:
 
 - Ubuntu XFCE desktop environment
 - Python 3 and pip
-- Visual Studio Code
-- Essential development tools (build-essential, git, curl, wget, etc.)
-- SSH client tools
-- Archive utilities (zip, unzip, 7zip, etc.)
+- Visual Studio Code (with --no-sandbox flag enabled by default)
+- Essential development tools (build-essential, git, curl, wget, nano, vim, file, etc.)
+- SSH client tools (openssh-client, ssh-tools, sshfs)
+- Archive utilities (zip, unzip, 7zip, gzip, bzip2, xz-utils)
+- Document viewers (okular)
+- Text editors (nano, vim, gedit)
+- Network tools (net-tools)
+- Compilers and build tools (gcc, g++)
+- Other utilities (caja, less)
 
 Based on: `docker.io/linuxserver/rdesktop:ubuntu-xfce-version-aaa0dc4e`
 
@@ -108,12 +113,12 @@ For accelerated apps or games, render devices can be mounted into the container 
 
 ## Tags
 
-- `1.0` - Initial release with Python, VS Code, and essential development tools
+- `1.0` - Initial release with Python, VS Code, and essential development tools.
 
 ## Image Information
 
 - **Base Image**: linuxserver/rdesktop:ubuntu-xfce-version-aaa0dc4e
-- **Maintainer**: Eduardo Vieira (@eduardoenemark)
+- **Maintainer**: Eduardo Vieira (Telegram/X: @eduardoenemark)
 - **Source Repository**: https://github.com/eduardoenemark/containers/tree/main/linuxserver-rdesktop-python-and-tools/xfce
 - **License**: GPL-3.0-only
 
