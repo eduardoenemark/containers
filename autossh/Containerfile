@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------
 # Base image – slim Debian (trixie) with the latest security updates
 # ----------------------------------------------------------------------
-FROM docker.io/debian:trixie-20251229-slim
+FROM docker.io/debian:trixie-20260518-slim
 
 # ---------------------------------------------------------------
 # 1. Environment variables – configure autossh at runtime
@@ -34,7 +34,7 @@ LABEL org.opencontainers.image.ref.name="autossh" \
 # 3. Install required packages
 # ------------------------------------------------------------------
 RUN apt-get update && \
-    apt-get install -y autossh sshpass net-tools iftop iptraf-ng htop bmon && \
+    apt-get install -y autossh sshpass socat net-tools iftop iptraf-ng htop bmon && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
