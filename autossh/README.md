@@ -14,7 +14,7 @@ This container packages `autossh` alongside useful networking and debugging tool
 - **Traffic monitoring** -- Periodically tests data flow through the tunnel
 - **Exponential backoff** -- Gradually increases delay between restart attempts on repeated failures
 - **Starting gate protection** -- Exits early if initial SSH setup fails (prevents infinite retry loops)
-- **Built-in debugging tools** -- Includes `htop`, `iftop`, `iptraf-ng`, `bmon`, `socat`, and `net-tools`
+- **Built-in debugging tools** -- Includes `iftop`, `iptraf-ng`, `bmon`, `socat`, and `net-tools`
 
 ## Installation
 
@@ -98,10 +98,9 @@ Replace `PASSWORD` with your SSH password and `root@myvps-domain.com` with your 
 | `net-tools` | Traditional networking tools (netstat, etc.) |
 | `iftop` | Real-time bandwidth monitoring |
 | `iptraf-ng` | Network traffic monitor |
-| `htop` | Interactive process viewer |
 | `bmon` | Bandwidth monitor |
 
-## Notes
+| netcat-openbsd | Network utility for TCP/UDP connections (nc)
 
 - The container requires **privileged mode** and **host networking** for direct port binding and tunnel manipulation.
 - Authentication must be pre-configured (via SSH keys or `sshpass`) -- the container cannot handle interactive password prompts.
