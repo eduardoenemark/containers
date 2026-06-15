@@ -96,6 +96,7 @@ Replace `PASSWORD` with your SSH password and `root@myvps-domain.com` with your 
 | `sshpass` | Non-interactive SSH password authentication |
 | `socat` | Bidirectional data relay / socket connector |
 | `net-tools` | Traditional networking tools (netstat, etc.) |
+| `iputils-ping` | Provides the `ping` command for network diagnostics |
 | `iftop` | Real-time bandwidth monitoring |
 | `iptraf-ng` | Network traffic monitor |
 | `bmon` | Bandwidth monitor |

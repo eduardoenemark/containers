@@ -34,7 +34,7 @@ LABEL org.opencontainers.image.ref.name="autossh" \
 # 3. Install required packages
 # ------------------------------------------------------------------
 RUN apt-get update && \
-    apt-get install -y autossh sshpass socat netcat-openbsd net-tools iftop iptraf-ng bmon && \
+    apt-get install -y autossh sshpass socat netcat-openbsd net-tools iftop iptraf-ng bmon iputils-ping && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
