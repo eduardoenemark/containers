@@ -1,6 +1,6 @@
 general:
   debug: true
-  instance_name: "SearchXNG"
+  instance_name: SearchXNG
   privacypolicy_url: false
   donation_url: true
   enable_metrics: true
@@ -14,9 +14,9 @@ brand:
 
 search:
   safe_search: 0
-  autocomplete: "google"
+  autocomplete: google
   autocomplete_min: 4
-  default_lang: "auto"
+  default_lang: auto
   ban_time_on_fail: 5
   max_ban_time_on_fail: 120
   suspended_times:
@@ -33,12 +33,15 @@ search:
     - rss
 
 server:
-  secret_key: "searxng"
+  # secret_key: ${SEARXNG_SECRET}
+  secret_key: searxng
   limiter: false
   image_proxy: false
-  method: "POST"
+  method: POST
   public_instance: true
-  bind_address: "127.0.0.1"
+  # bind_address: ${SEARXNG_BIND}
+  bind_address: 127.0.0.1
+  # port: ${SEARXNG_PORT}
   port: 8080
   http_protocol_version: "1.1"
   default_http_headers:
@@ -48,7 +51,7 @@ server:
     Referrer-Policy: no-referrer
 
 valkey:
-  url: valkey://searxng-valkey:6379/0
+  url: valkey://valkey:6379/0
 
 ui:
   static_path: ""
