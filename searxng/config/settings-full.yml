@@ -34,7 +34,7 @@ search:
 
 server:
   secret_key: searxng
-  limiter: false
+  limiter: true
   image_proxy: false
   method: POST
   public_instance: true

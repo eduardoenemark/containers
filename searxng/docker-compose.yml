@@ -35,6 +35,7 @@ services:
     volumes:
       - ./config/settings-full.yml:/etc/searxng/settings.yml:ro,Z
       - ./config/limiter.toml:/etc/searxng/limiter.toml:ro,Z
+      - ./ip_limit.py:/usr/local/searxng/searx/botdetection/ip_limit.py:ro,Z
       - ./data-searxng:/var/lib/searxng
     networks:
       - searxng-net
@@ -44,8 +45,6 @@ services:
     container_name: nginx
     restart: always
     ports:
-      - 80:80
-      - 8080:80
       - 8888:80
       - 443:443
     volumes:
