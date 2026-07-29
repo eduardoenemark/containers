@@ -58,35 +58,35 @@ from ._helpers import (
 
 logger = logger.getChild('ip_limit')
 
-BURST_WINDOW = 20
 """Time (sec) before sliding window for *burst* requests expires."""
+BURST_WINDOW = 20
 
-BURST_MAX = 5
 """Maximum requests from one IP in the :py:obj:`BURST_WINDOW`"""
+BURST_MAX = 20
 
-BURST_MAX_SUSPICIOUS = 2
 """Maximum of suspicious requests from one IP in the :py:obj:`BURST_WINDOW`"""
+BURST_MAX_SUSPICIOUS = 5
 
-LONG_WINDOW = 60
 """Time (sec) before the longer sliding window expires."""
+LONG_WINDOW = 60
 
-LONG_MAX = 5
 """Maximum requests from one IP in the :py:obj:`LONG_WINDOW`"""
+LONG_MAX = 30
 
-LONG_MAX_SUSPICIOUS = 10
 """Maximum suspicious requests from one IP in the :py:obj:`LONG_WINDOW`"""
+LONG_MAX_SUSPICIOUS = 15
 
-API_WINDOW = 3600
 """Time (sec) before sliding window for API requests (format != html) expires."""
+API_WINDOW = 60
 
-API_MAX = 4
 """Maximum requests from one IP in the :py:obj:`API_WINDOW`"""
+API_MAX = 20
 
-SUSPICIOUS_IP_WINDOW = 3600 * 24 * 30
 """Time (sec) before sliding window for one suspicious IP expires."""
+SUSPICIOUS_IP_WINDOW = 60
 
-SUSPICIOUS_IP_MAX = 3
 """Maximum requests from one suspicious IP in the :py:obj:`SUSPICIOUS_IP_WINDOW`."""
+SUSPICIOUS_IP_MAX = 3
 
 
 def filter_request(
