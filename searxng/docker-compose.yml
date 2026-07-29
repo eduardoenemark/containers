@@ -1,15 +1,5 @@
 version: "3.9"
-
 # SearXNG — Dedicated Private Search Service
-# Engines configurados: 55+
-#
-# Commands:
-#   Start and stay same console: podman-compose up
-#   Start with detached process: docker compose up -d
-#   Stop: podman-compose down
-#   Show live logs: podman-compose logs -f
-#   Example request command:  curl -kv "http://localhost:8888/search?q=python+test&format=json" -o python-test-result.json
-
 services:
   valkey:
     image: docker.io/valkey/valkey:9-alpine3.24
@@ -33,10 +23,33 @@ services:
       valkey:
         condition: service_healthy
     volumes:
-      - ./config/settings-full.yml:/etc/searxng/settings.yml:ro,Z
+      - ./config/searxng-settings.yml:/etc/searxng/settings.yml:ro,Z
       - ./config/limiter.toml:/etc/searxng/limiter.toml:ro,Z
       - ./config/ip_limit.py:/usr/local/searxng/searx/botdetection/ip_limit.py:ro,Z
       - ./data-searxng:/var/lib/searxng
+    environment:
+      # Secret key for the server
+      - SEARXNG_SECRET_KEY=${SEARXNG_SECRET_KEY:-changeit}
+      # Time (sec) before sliding window for burst requests expires
+      - SEARXNG_BURST_WINDOW=20
+      # Maximum requests from one IP in the BURST_WINDOW
+      - SEARXNG_BURST_MAX=20
+      # Maximum of suspicious requests from one IP in the BURST_WINDOW
+      - SEARXNG_BURST_MAX_SUSPICIOUS=5
+      # Time (sec) before the longer sliding window expires
+      - SEARXNG_LONG_WINDOW=60
+      # Maximum requests from one IP in the LONG_WINDOW
+      - SEARXNG_LONG_MAX=30
+      # Maximum suspicious requests from one IP in the LONG_WINDOW
+      - SEARXNG_LONG_MAX_SUSPICIOUS=15
+      # Time (sec) before sliding window for API requests expires
+      - SEARXNG_API_WINDOW=60
+      # Maximum requests from one IP in the API_WINDOW
+      - SEARXNG_API_MAX=20
+      # Time (sec) before sliding window for one suspicious IP expires
+      - SEARXNG_SUSPICIOUS_IP_WINDOW=60
+      # Maximum requests from one suspicious IP in the SUSPICIOUS_IP_WINDOW
+      - SEARXNG_SUSPICIOUS_IP_MAX=3
     networks:
       - searxng-net
 

@@ -44,6 +44,7 @@ from ipaddress import (
 
 import flask
 import werkzeug
+import os
 
 from searx.valkeylib import incr_sliding_window, drop_counter
 
@@ -59,34 +60,34 @@ from ._helpers import (
 logger = logger.getChild('ip_limit')
 
 """Time (sec) before sliding window for *burst* requests expires."""
-BURST_WINDOW = 20
+BURST_WINDOW = int(os.getenv('SEARXNG_BURST_WINDOW', 20))
 
 """Maximum requests from one IP in the :py:obj:`BURST_WINDOW`"""
-BURST_MAX = 20
+BURST_MAX = int(os.getenv('SEARXNG_BURST_MAX', 20))
 
 """Maximum of suspicious requests from one IP in the :py:obj:`BURST_WINDOW`"""
-BURST_MAX_SUSPICIOUS = 5
+BURST_MAX_SUSPICIOUS = int(os.getenv('SEARXNG_BURST_MAX_SUSPICIOUS', 5))
 
 """Time (sec) before the longer sliding window expires."""
-LONG_WINDOW = 60
+LONG_WINDOW = int(os.getenv('SEARXNG_LONG_WINDOW', 60))
 
 """Maximum requests from one IP in the :py:obj:`LONG_WINDOW`"""
-LONG_MAX = 30
+LONG_MAX = int(os.getenv('SEARXNG_LONG_MAX', 30))
 
 """Maximum suspicious requests from one IP in the :py:obj:`LONG_WINDOW`"""
-LONG_MAX_SUSPICIOUS = 15
+LONG_MAX_SUSPICIOUS = int(os.getenv('SEARXNG_LONG_MAX_SUSPICIOUS', 15))
 
 """Time (sec) before sliding window for API requests (format != html) expires."""
-API_WINDOW = 60
+API_WINDOW = int(os.getenv('SEARXNG_API_WINDOW', 60))
 
 """Maximum requests from one IP in the :py:obj:`API_WINDOW`"""
-API_MAX = 20
+API_MAX = int(os.getenv('SEARXNG_API_MAX', 20))
 
 """Time (sec) before sliding window for one suspicious IP expires."""
-SUSPICIOUS_IP_WINDOW = 60
+SUSPICIOUS_IP_WINDOW = int(os.getenv('SEARXNG_SUSPICIOUS_IP_WINDOW', 60))
 
 """Maximum requests from one suspicious IP in the :py:obj:`SUSPICIOUS_IP_WINDOW`."""
-SUSPICIOUS_IP_MAX = 3
+SUSPICIOUS_IP_MAX = int(os.getenv('SEARXNG_SUSPICIOUS_IP_MAX', 3))
 
 
 def filter_request(
