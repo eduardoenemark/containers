@@ -12,8 +12,6 @@ trusted_proxies = [
 ]
 
 [botdetection.ip_limit]
-filter_link_local = false
-link_token = false
 
 [botdetection.ip_lists]
 block_ip = [

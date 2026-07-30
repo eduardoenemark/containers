@@ -20,6 +20,9 @@ This instance is built with a security-first approach. The current configuration
   - `X-Frame-Options`: Prevents clickjacking by restricting framing to the same origin.
   - `X-Content-Type-Options`: Prevents MIME-type sniffing.
   - `Permissions-Policy`: Disables access to geolocation, microphone, and camera.
+  - `Referrer-Policy`: Set to `no-referrer` to ensure maximum privacy.
+
+- **Endpoint Protection**: Nginx is configured to block direct access to sensitive endpoints like `/config` and `/stats`.
 
 - **Bot Detection & Rate Limiting**: Integrated bot detection system using a custom limiter configuration to mitigate abuse.
   - General settings are configured in `config/limiter.toml`.
@@ -57,17 +60,17 @@ The deployment uses a containerized architecture for isolation and scalability:
 ```
 
 ### Request Flow in config/ip_limit.py
-
+ 
 ```text
 [ Incoming Request ]
         |
         v
-+------------------------+
-|  Is it an API request? | --(Yes)--> [ API Limiter ] 
-|   (format != 'html')   |             - Window: SEARXNG_API_WINDOW
-+------------------------+             - Max:    SEARXNG_API_MAX
++--------------------------+
+|  Is it link-local &      | --(Yes)--> [ Allow Request ]
+|  FILTER_LINK_LOCAL=false?|
++--------------------------+
         |
-      (No)
+       (No)
         |
         v
 +------------------------+
@@ -85,7 +88,7 @@ The deployment uses a containerized architecture for isolation and scalability:
         |
         v
 [ Suspicious Limiter ]
-1. Window: SEARXNG_SUSPICIOUS_IP_WINDOW / Max: SEARXNG_SUSPICIOUS_IP_MAX
+1. Window: SEARXNG_SUSPICIOUS_IP_WINDOW / Max: SEARXNG_SUSPICIOUS_IP_MAX (Redirects to / if exceeded)
 2. Window: SEARXNG_BURST_WINDOW         / Max: SEARXNG_BURST_MAX_SUSPICIOUS
 3. Window: SEARXNG_LONG_WINDOW          / Max: SEARXNG_LONG_MAX_SUSPICIOUS
 ```

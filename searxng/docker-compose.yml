@@ -42,14 +42,14 @@ services:
       - SEARXNG_LONG_MAX=30
       # Maximum suspicious requests from one IP in the LONG_WINDOW
       - SEARXNG_LONG_MAX_SUSPICIOUS=15
-      # Time (sec) before sliding window for API requests expires
-      - SEARXNG_API_WINDOW=60
-      # Maximum requests from one IP in the API_WINDOW
-      - SEARXNG_API_MAX=20
       # Time (sec) before sliding window for one suspicious IP expires
       - SEARXNG_SUSPICIOUS_IP_WINDOW=60
       # Maximum requests from one suspicious IP in the SUSPICIOUS_IP_WINDOW
       - SEARXNG_SUSPICIOUS_IP_MAX=3
+      # Enable link token for bot detection
+      - SEARXNG_LINK_TOKEN=true
+      # Filter link-local networks
+      - SEARXNG_FILTER_LINK_LOCAL=false
     networks:
       - searxng-net
 
