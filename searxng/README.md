@@ -10,7 +10,7 @@ This deployment comes with **+310 search engines** pre-configured to provide com
 
 ## Security Hardening
 
-This instance is built with a security-first approach. The current configuration is the result of **five completed penetration testing cycles**, ensuring maximum security and privacy for all users. 
+This instance is built with a security-first approach. The current configuration is the result of **five rounds penetration testing (pentest)**, ensuring maximum security and privacy for all users.
 
 ### Configuration Highlights
 
