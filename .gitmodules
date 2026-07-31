@@ -1,0 +1,24 @@
+[submodule "autossh"]
+	path = autossh
+	url = /home/kali/projects/containers/github/containers/autossh
+[submodule "h2"]
+	path = h2
+	url = /home/kali/projects/containers/github/containers/h2
+[submodule "linuxserver-rdesktop-python-and-tools"]
+	path = linuxserver-rdesktop-python-and-tools
+	url = /home/kali/projects/containers/github/containers/linuxserver-rdesktop-python-and-tools
+[submodule "monero"]
+	path = monero
+	url = /home/kali/projects/containers/github/containers/monero
+[submodule "rocm"]
+	path = rocm
+	url = /home/kali/projects/containers/github/containers/rocm
+[submodule "searxng"]
+	path = searxng
+	url = /home/kali/projects/containers/github/containers/searxng
+[submodule "tor-proxy"]
+	path = tor-proxy
+	url = /home/kali/projects/containers/github/containers/tor-proxy
+[submodule "tor"]
+	path = tor
+	url = /home/kali/projects/containers/github/containers/tor

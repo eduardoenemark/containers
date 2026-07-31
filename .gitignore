@@ -2,3 +2,13 @@
 home
 temp/
 tmp/
+
+# Subproject directories tracked as git submodules
+autossh/
+h2/
+linuxserver-rdesktop-python-and-tools/
+monero/
+rocm/
+searxng/
+tor-proxy/
+tor/
