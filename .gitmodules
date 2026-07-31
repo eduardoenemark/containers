@@ -1,24 +1,24 @@
 [submodule "autossh"]
 	path = autossh
-	url = /home/kali/projects/containers/github/containers/autossh
+	url = https://github.com/eduardoenemark/containers-autossh.git
 [submodule "h2"]
 	path = h2
-	url = /home/kali/projects/containers/github/containers/h2
+	url = https://github.com/eduardoenemark/containers-h2.git
 [submodule "linuxserver-rdesktop-python-and-tools"]
 	path = linuxserver-rdesktop-python-and-tools
-	url = /home/kali/projects/containers/github/containers/linuxserver-rdesktop-python-and-tools
+	url = https://github.com/eduardoenemark/containers-linuxserver-rdesktop-python-and-tools.git
 [submodule "monero"]
 	path = monero
-	url = /home/kali/projects/containers/github/containers/monero
+	url = https://github.com/eduardoenemark/containers-monero.git
 [submodule "rocm"]
 	path = rocm
-	url = /home/kali/projects/containers/github/containers/rocm
+	url = https://github.com/eduardoenemark/containers-rocm.git
 [submodule "searxng"]
 	path = searxng
-	url = /home/kali/projects/containers/github/containers/searxng
+	url = https://github.com/eduardoenemark/containers-searxng.git
 [submodule "tor-proxy"]
 	path = tor-proxy
-	url = /home/kali/projects/containers/github/containers/tor-proxy
+	url = https://github.com/eduardoenemark/containers-tor-proxy.git
 [submodule "tor"]
 	path = tor
-	url = /home/kali/projects/containers/github/containers/tor
+	url = https://github.com/eduardoenemark/containers-tor.git
